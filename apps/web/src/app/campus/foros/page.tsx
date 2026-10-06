@@ -1,0 +1,1 @@
+import { ForumDemo } from '@/components/forum-demo';export default function Page(){return <div className="content"><div className="page-title"><div><h1>Foros</h1><p className="muted">Participa, edita tus aportes y revisa la retroalimentación.</p></div></div><ForumDemo/></div>}

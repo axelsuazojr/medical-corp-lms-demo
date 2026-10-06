@@ -1,0 +1,1 @@
+import type { CollectionConfig } from 'payload';import { loggedIn, superAdminOnly } from '../access';export const Permissions:CollectionConfig={slug:'permissions',access:{read:loggedIn,create:superAdminOnly,update:superAdminOnly,delete:superAdminOnly},admin:{useAsTitle:'key'},fields:[{name:'key',type:'text',required:true,unique:true},{name:'description',type:'text'}]}
