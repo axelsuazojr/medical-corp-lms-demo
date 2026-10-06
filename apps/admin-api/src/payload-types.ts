@@ -89,6 +89,7 @@ export interface Config {
     notifications: Notification;
     webinars: Webinar;
     'activity-events': ActivityEvent;
+    'site-pages': SitePage;
     roles: Role;
     permissions: Permission;
     'quiz-answers': QuizAnswer;
@@ -123,6 +124,7 @@ export interface Config {
     notifications: NotificationsSelect<false> | NotificationsSelect<true>;
     webinars: WebinarsSelect<false> | WebinarsSelect<true>;
     'activity-events': ActivityEventsSelect<false> | ActivityEventsSelect<true>;
+    'site-pages': SitePagesSelect<false> | SitePagesSelect<true>;
     roles: RolesSelect<false> | RolesSelect<true>;
     permissions: PermissionsSelect<false> | PermissionsSelect<true>;
     'quiz-answers': QuizAnswersSelect<false> | QuizAnswersSelect<true>;
@@ -437,6 +439,9 @@ export interface Submission {
   submittedAt?: string | null;
   withdrawnAt?: string | null;
   attempt?: number | null;
+  teacherFeedback?: string | null;
+  gradedBy?: (string | null) | User;
+  gradedAt?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -450,6 +455,8 @@ export interface Forum {
   module?: (string | null) | Module;
   title: string;
   description?: string | null;
+  startAt?: string | null;
+  endAt?: string | null;
   status?: ('OPEN' | 'CLOSED') | null;
   gradable?: boolean | null;
   maxPoints?: number | null;
@@ -702,6 +709,99 @@ export interface ActivityEvent {
   createdAt: string;
 }
 /**
+ * Constructor visual de contenido público. Disponible únicamente para SUPER_ADMIN.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-pages".
+ */
+export interface SitePage {
+  id: string;
+  title: string;
+  slug: 'inicio' | 'cursos' | 'empresa';
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+  };
+  components?:
+    | (
+        | {
+            eyebrow?: string | null;
+            heading: string;
+            body?: string | null;
+            primaryLabel?: string | null;
+            primaryHref?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            heading: string;
+            body?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            showLogo?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'companyInfo';
+          }
+        | {
+            heading?: string | null;
+            intro?: string | null;
+            courses?: (string | Course)[] | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'courseGrid';
+          }
+        | {
+            heading?: string | null;
+            body?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            alignment?: ('LEFT' | 'CENTER') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'contentSection';
+          }
+        | {
+            heading: string;
+            body?: string | null;
+            buttonLabel?: string | null;
+            buttonHref?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cta';
+          }
+      )[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "roles".
  */
@@ -882,6 +982,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'activity-events';
         value: string | ActivityEvent;
+      } | null)
+    | ({
+        relationTo: 'site-pages';
+        value: string | SitePage;
       } | null)
     | ({
         relationTo: 'roles';
@@ -1118,6 +1222,9 @@ export interface SubmissionsSelect<T extends boolean = true> {
   submittedAt?: T;
   withdrawnAt?: T;
   attempt?: T;
+  teacherFeedback?: T;
+  gradedBy?: T;
+  gradedAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1130,6 +1237,8 @@ export interface ForumsSelect<T extends boolean = true> {
   module?: T;
   title?: T;
   description?: T;
+  startAt?: T;
+  endAt?: T;
   status?: T;
   gradable?: T;
   maxPoints?: T;
@@ -1327,6 +1436,75 @@ export interface ActivityEventsSelect<T extends boolean = true> {
   metadata?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-pages_select".
+ */
+export interface SitePagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  components?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              body?: T;
+              primaryLabel?: T;
+              primaryHref?: T;
+              id?: T;
+              blockName?: T;
+            };
+        companyInfo?:
+          | T
+          | {
+              heading?: T;
+              body?: T;
+              showLogo?: T;
+              id?: T;
+              blockName?: T;
+            };
+        courseGrid?:
+          | T
+          | {
+              heading?: T;
+              intro?: T;
+              courses?: T;
+              id?: T;
+              blockName?: T;
+            };
+        contentSection?:
+          | T
+          | {
+              heading?: T;
+              body?: T;
+              alignment?: T;
+              id?: T;
+              blockName?: T;
+            };
+        cta?:
+          | T
+          | {
+              heading?: T;
+              body?: T;
+              buttonLabel?: T;
+              buttonHref?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

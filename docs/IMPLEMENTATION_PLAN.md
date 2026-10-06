@@ -47,7 +47,6 @@
 ## Fase 6 - Producción
 
 - Dominios finales.
-- OAuth productivo.
 - SMTP/transaccional.
 - S3/R2 privado.
 - Observabilidad.

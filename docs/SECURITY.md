@@ -3,7 +3,7 @@
 ## Fronteras de confianza
 
 - El navegador se considera no confiable.
-- PostgreSQL, Payload secrets, secretos OAuth y S3 viven únicamente en servidor.
+- PostgreSQL, secretos de Payload y credenciales S3 viven únicamente en servidor.
 - La UI puede ocultar acciones, pero la autorización definitiva pertenece al backend.
 - Los recursos protegidos requieren controles de acceso de Payload y almacenamiento privado.
 

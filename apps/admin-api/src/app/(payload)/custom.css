@@ -1,1 +1,16 @@
-:root{--theme-elevation-50:#f7f9fb;--theme-elevation-800:#092f4c}.nav{border-right:1px solid #dfe7ec}.nav__brand{background:#092f4c}.app-header{border-bottom:1px solid #e3e9ed}.template-default__wrap:before{content:"MEDICAL CORP · Administración académica";display:block;color:#092f4c;font-weight:700;margin-bottom:12px}
+:root{
+  --theme-elevation-0:#ffffff;
+  --theme-elevation-50:#f6f9fb;
+  --theme-elevation-100:#edf3f6;
+  --theme-elevation-150:#e1eaef;
+  --theme-elevation-200:#d5e0e6;
+  --theme-elevation-800:#0b3859;
+  --theme-elevation-900:#082b46;
+  --theme-elevation-1000:#061d2d;
+  --theme-success-500:#2c7a52;
+  --theme-warning-500:#b9961e;
+  --style-radius-s:8px;
+  --style-radius-m:12px;
+  --style-radius-l:16px;
+}
+body{background:#f5f8fa}.nav{border-right:1px solid #dbe5ea;background:linear-gradient(180deg,#061f31,#082f4c)!important}.nav a,.nav button,.nav__label{color:#dbe8ef!important}.nav a:hover{background:rgba(255,255,255,.08)!important}.app-header{border-bottom:1px solid #e0e8ec;background:rgba(255,255,255,.96)!important}.template-default__wrap{max-width:1500px}.template-default__wrap:before{content:"MEDICAL CORP · Administración académica";display:block;color:#092f4c;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:15px}.collection-list,.document-fields,.card{border-radius:14px}.pill{border-radius:999px}.btn{border-radius:9px}.mc-payload-logo{display:flex;align-items:center;gap:12px;color:#092f4c;font-weight:900;letter-spacing:.06em}.mc-payload-logo img{width:82px;height:82px;object-fit:contain}.mc-payload-logo span{font-size:18px}.mc-payload-icon{width:100%;display:flex;justify-content:center;padding:4px}.mc-payload-icon img{width:52px;height:52px;object-fit:contain;filter:drop-shadow(0 7px 14px rgba(0,0,0,.16))}.nav .mc-payload-icon img{background:#fff;border-radius:14px;padding:4px}.dashboard__wrap h1,.collection-list__header h1{color:#092f4c;letter-spacing:-.03em}.table{border:1px solid #e1e9ed;border-radius:12px;overflow:hidden}.table thead{background:#f4f8fa}.field-type textarea,.field-type input,.react-select__control{border-radius:9px!important}

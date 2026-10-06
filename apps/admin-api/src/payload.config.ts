@@ -32,6 +32,7 @@ import { Webinars } from './collections/Webinars'
 import { Media } from './collections/Media'
 import { AuditLogs } from './collections/AuditLogs'
 import { ActivityEvents } from './collections/ActivityEvents'
+import { SitePages } from './collections/SitePages'
 import { withAudit } from './audit'
 
 const filename=fileURLToPath(import.meta.url);const dirname=path.dirname(filename)
@@ -43,8 +44,8 @@ export default buildConfig({
   db:postgresAdapter({pool:{connectionString:process.env.DATABASE_URL||''},idType:'uuid'}),
   editor:lexicalEditor(),
   sharp,
-  collections:[...audited,Roles,Permissions,QuizAnswers,Media,AuditLogs],
-  admin:{user:'users',meta:{titleSuffix:' · MEDICAL CORP'},importMap:{baseDir:path.resolve(dirname)}},
+  collections:[...audited,SitePages,Roles,Permissions,QuizAnswers,Media,AuditLogs],
+  admin:{user:'users',meta:{titleSuffix:' · MEDICAL CORP'},components:{graphics:{Logo:'/components/payload/MedicalCorpLogo',Icon:'/components/payload/MedicalCorpIcon'}},importMap:{baseDir:path.resolve(dirname)}},
   routes:{admin:'/admin'},
   cors:[appUrl,adminUrl],
   csrf:[appUrl,adminUrl],

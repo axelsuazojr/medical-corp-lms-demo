@@ -1,8 +1,38 @@
 import Link from 'next/link'
-import { ArrowRight, Award, BookOpenCheck, ShieldCheck, UsersRound } from 'lucide-react'
+import { ArrowRight, Building2, Check, GraduationCap, HeartPulse, ShieldCheck, Stethoscope } from 'lucide-react'
 import { PublicNav } from '@/components/public-nav'
 import { Footer } from '@/components/footer'
 import { CourseCard } from '@/components/course-card'
-import { courses, webinars } from '@/lib/demo-data'
+import { courses } from '@/lib/demo-data'
+import { getPublicPage } from '@/lib/public-content'
+import { PublicPageBlocks } from '@/components/public-page-blocks'
 
-export default function Home(){return <><PublicNav/><section className="hero"><div className="container hero-grid"><div><span className="eyebrow"><ShieldCheck size={14}/> Formación continua en salud</span><h1>Aprender mejor para cuidar mejor.</h1><p>Capacitación profesional, cursos asincrónicos y actualización especializada en una experiencia académica clara, medible y accesible desde cualquier dispositivo.</p><div className="hero-actions"><Link className="btn btn-primary" href="/cursos">Explorar cursos <ArrowRight size={16}/></Link><Link className="btn btn-outline" href="/login">Iniciar sesión</Link></div><div style={{display:'flex',gap:28,marginTop:36,flexWrap:'wrap'}}><div><strong style={{fontSize:24,color:'var(--navy)'}}>100%</strong><div className="muted" style={{fontSize:12}}>Modalidad flexible</div></div><div><strong style={{fontSize:24,color:'var(--navy)'}}>24/7</strong><div className="muted" style={{fontSize:12}}>Acceso al campus</div></div><div><strong style={{fontSize:24,color:'var(--navy)'}}>Progreso</strong><div className="muted" style={{fontSize:12}}>Medible por curso</div></div></div></div><div className="hero-panel"><span className="eyebrow" style={{background:'rgba(255,255,255,.08)',borderColor:'rgba(255,255,255,.15)',color:'white'}}>Campus MEDICAL CORP</span><div className="mock-window"><div className="mock-top"><div><small className="muted">Curso activo</small><strong style={{display:'block',marginTop:4,color:'var(--navy)'}}>Actualización Profesional en Atención Médica</strong></div><span className="pill">Semana 4</span></div><div className="mock-course"><div style={{display:'flex',justifyContent:'space-between',fontSize:12,marginBottom:8}}><b>Progreso general</b><b>72%</b></div><div className="progress"><span style={{width:'72%'}}/></div><div className="metric-row"><div className="metric"><strong>8</strong><small>Clases</small></div><div className="metric"><strong>3</strong><small>Tareas</small></div><div className="metric"><strong>91%</strong><small>Promedio</small></div></div></div></div></div></div></section><section className="section"><div className="container"><div className="section-head"><div><span className="eyebrow">Cursos destacados</span><h2>Formación aplicada a tu práctica profesional</h2><p>Programas organizados por semanas, con recursos, actividades, evaluaciones y seguimiento del avance.</p></div><Link href="/cursos" className="btn btn-ghost">Ver todos <ArrowRight size={16}/></Link></div><div className="grid-3">{courses.slice(0,3).map(c=><CourseCard key={c.slug} course={c}/>)}</div></div></section><section className="section band" id="nosotros"><div className="container"><div className="section-head"><div><span className="eyebrow" style={{background:'rgba(255,255,255,.06)',color:'white',borderColor:'rgba(255,255,255,.16)'}}>Experiencia académica</span><h2>Una plataforma diseñada para aprender, acompañar y medir.</h2><p className="muted">MEDICAL CORP combina contenidos especializados con seguimiento académico y comunicación directa.</p></div></div><div className="grid-3"><div className="benefit"><div className="iconbox"><BookOpenCheck/></div><h3>Contenido estructurado</h3><p className="muted">Módulos por semana, recursos centralizados y requisitos de avance.</p></div><div className="benefit"><div className="iconbox"><Award/></div><h3>Resultados visibles</h3><p className="muted">Calificaciones, asistencia, entregas y progreso en un mismo panel.</p></div><div className="benefit"><div className="iconbox"><UsersRound/></div><h3>Acompañamiento</h3><p className="muted">Foros, anuncios y mensajería directa con el equipo docente.</p></div></div></div></section><section className="section"><div className="container"><div className="section-head"><div><span className="eyebrow">Webinars gratuitos</span><h2>Actualización abierta para la comunidad</h2></div><Link href="/webinars" className="btn btn-outline">Ver calendario</Link></div><div className="grid-3">{webinars.map(w=><div className="card" key={w.title}><div className="card-body"><span className="pill">{w.status}</span><h3 className="course-title">{w.title}</h3><p className="muted">{w.speaker}</p><p style={{fontWeight:700,color:'var(--navy)'}}>{w.date} · {w.time}</p></div></div>)}</div></div></section><Footer/></>}
+export default async function Home(){const managed=await getPublicPage('inicio');if(managed?.components?.length)return <><PublicNav/><PublicPageBlocks blocks={managed.components}/><Footer/></>;return <><PublicNav/>
+  <main>
+    <section className="public-hero-v2">
+      <div className="container hero-v2-grid">
+        <div className="hero-v2-copy">
+          <span className="eyebrow"><ShieldCheck size={14}/> Educación profesional en salud</span>
+          <h1>Formación clínica con criterio, estructura y propósito.</h1>
+          <p>MEDICAL CORP desarrolla experiencias de aprendizaje para profesionales y equipos de salud que necesitan actualizar conocimientos y aplicarlos con claridad en su práctica diaria.</p>
+          <div className="hero-actions"><Link className="btn btn-primary" href="/cursos">Explorar programas <ArrowRight size={16}/></Link><Link className="btn btn-outline" href="/login">Acceso al campus</Link></div>
+          <div className="hero-trust-row"><span><Check size={15}/> Contenido especializado</span><span><Check size={15}/> Modalidad flexible</span><span><Check size={15}/> Acompañamiento docente</span></div>
+        </div>
+        <div className="hero-v2-art" aria-label="MEDICAL CORP educación continua">
+          <div className="hero-art-card hero-art-main"><HeartPulse size={26}/><span>Educación continua</span><strong>Conocimiento que se convierte en mejores decisiones.</strong></div>
+          <div className="hero-art-card hero-art-small"><Stethoscope size={22}/><span>Práctica profesional</span></div>
+          <div className="hero-art-orbit"><GraduationCap size={30}/></div>
+        </div>
+      </div>
+    </section>
+
+    <section className="company-strip">
+      <div className="container company-strip-grid"><div><span>MEDICAL CORP</span><strong>Capacitación para organizaciones y profesionales del sector salud.</strong></div><div className="company-stat"><Building2/><p>Programas diseñados para reforzar competencias clínicas, seguridad, gestión y comunicación.</p></div></div>
+    </section>
+
+    <section className="section public-courses-section">
+      <div className="container"><div className="section-head"><div><span className="eyebrow">Oferta académica</span><h2>Programas creados para la práctica real.</h2><p>Consulta el contenido, duración, modalidad e instructor de cada programa antes de ingresar al campus.</p></div><Link href="/cursos" className="btn btn-ghost">Ver catálogo <ArrowRight size={16}/></Link></div><div className="grid-3">{courses.slice(0,3).map(c=><CourseCard key={c.slug} course={c}/>)}</div></div>
+    </section>
+
+    <section className="section company-about" id="nosotros"><div className="container about-grid"><div><span className="eyebrow">Quiénes somos</span><h2>Una plataforma académica alineada con la realidad de los equipos de salud.</h2></div><div><p>MEDICAL CORP integra educación continua, actualización profesional y recursos aplicados en una experiencia digital clara y consistente con la identidad corporativa.</p><p>La propuesta académica prioriza contenidos organizados, acceso flexible, recursos de apoyo y comunicación directa con el equipo docente.</p><Link href="/contacto" className="text-link">Conocer más sobre MEDICAL CORP <ArrowRight size={15}/></Link></div></div></section>
+  </main><Footer/></>}

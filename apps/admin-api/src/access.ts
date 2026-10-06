@@ -88,6 +88,25 @@ export const staffOnly: Access = ({ req }) => {
   ])
 }
 
+
+export const usersReadAccess: Access = ({ req }) => {
+  const currentUser = getUser(req.user)
+
+  if (!currentUser) return false
+  if (hasRole(currentUser, ['SUPER_ADMIN', 'CO_ADMIN'])) return true
+
+  if (currentUser.role === 'TEACHER') {
+    return {
+      or: [
+        { id: { equals: currentUser.id } },
+        { role: { equals: 'STUDENT' } },
+      ],
+    }
+  }
+
+  return { id: { equals: currentUser.id } }
+}
+
 export const selfOrAdmin: Access = ({ req }) => {
   const currentUser = getUser(req.user)
 

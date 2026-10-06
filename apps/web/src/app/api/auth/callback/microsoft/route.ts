@@ -1,1 +1,0 @@
-import { NextResponse } from 'next/server';import { finishOAuth } from '@/lib/oauth';export async function GET(req:Request){try{await finishOAuth('microsoft',req);return NextResponse.redirect(new URL('/campus',req.url))}catch{return NextResponse.redirect(new URL('/login?error=oauth',req.url))}}

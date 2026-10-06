@@ -1,0 +1,4 @@
+import Link from 'next/link'
+import { ArrowUpRight, UsersRound } from 'lucide-react'
+import { courses } from '@/lib/demo-data'
+export default function Page(){return <div className="content"><div className="page-title"><div><span className="section-label">Gestión académica</span><h1>Mis cursos</h1><p className="muted">Entra a un curso para editar contenido, actividades, foros y calificaciones.</p></div></div><div className="teacher-course-grid teacher-course-grid-full">{courses.slice(0,3).map(course=><Link href={`/teacher/cursos/${course.slug}`} className="teacher-course-card large" key={course.slug}><div className={`teacher-course-accent ${course.coverClass}`}/><div><span>{course.category}</span><h3>{course.title}</h3><p>{course.duration} · {course.instructor}</p><div className="teacher-course-stats"><span><UsersRound size={15}/> {course.students} estudiantes</span><span>{course.weeks} semanas</span></div></div><ArrowUpRight size={22}/></Link>)}</div></div>}

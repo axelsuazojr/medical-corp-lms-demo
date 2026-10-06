@@ -21,7 +21,7 @@ Browser
          - Storage S3-compatible
 ```
 
-Para producción, el navegador no debe recibir credenciales internas, `DATABASE_URL`, `PAYLOAD_SECRET`, secretos OAuth ni credenciales S3. El frontend debe consumir datos sensibles mediante rutas server-side/BFF o Server Components.
+Para producción, el navegador no debe recibir credenciales internas, `DATABASE_URL`, `PAYLOAD_SECRET`, secretos de autenticación ni credenciales S3. El frontend debe consumir datos sensibles mediante rutas server-side/BFF o Server Components.
 
 ## 2. Monorepo
 
@@ -93,7 +93,7 @@ User --< Enrollment >-- Course --< Module --< Lesson
 
 El campus incluye un flujo funcional de autenticación por correo con cookie firmada HMAC, HttpOnly, SameSite y Secure en producción. Las contraseñas demo se suministran por variables de entorno.
 
-También se incluyeron flujos OAuth 2.0 / OpenID Connect para Google y Microsoft. Los botones solo funcionan cuando se configuran las credenciales correspondientes.
+El acceso del demo se realiza únicamente mediante correo y contraseña. El rol de la sesión determina si el usuario entra al campus de estudiante o al panel docente.
 
 ### Payload
 

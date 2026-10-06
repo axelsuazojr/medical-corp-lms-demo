@@ -67,22 +67,9 @@ pnpm --filter @medical-corp/admin-api seed
 
 El seed crea usuarios de ejemplo, un curso, módulos, una tarea, matrícula y notificación.
 
-## OAuth
+## Inicio de sesión
 
-Google y Microsoft/Outlook están preparados en el frontend. Configura:
-
-```env
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-MICROSOFT_CLIENT_ID=
-MICROSOFT_CLIENT_SECRET=
-MICROSOFT_TENANT_ID=common
-```
-
-Callbacks:
-
-- `/api/auth/callback/google`
-- `/api/auth/callback/microsoft`
+El demo utiliza acceso por correo y contraseña. Estudiantes y profesores se redirigen a paneles separados según su rol.
 
 ## Storage privado
 
@@ -111,7 +98,6 @@ Variables:
 - `AUTH_SECRET`
 - `NEXT_PUBLIC_APP_URL`
 - `INTERNAL_API_URL`
-- OAuth si se usa
 - `NEXT_PUBLIC_INSTAGRAM_URL`
 - contraseñas/correos demo mientras siga activo el modo demo
 
@@ -133,7 +119,6 @@ Para una demo simple se puede usar Neon PostgreSQL + Cloudflare R2.
 ## Seguridad incorporada
 
 - cookies HttpOnly/Secure/SameSite
-- OAuth state anti-CSRF
 - Payload RBAC/access control
 - bloqueo por intentos fallidos en auth Payload
 - API/administración separadas

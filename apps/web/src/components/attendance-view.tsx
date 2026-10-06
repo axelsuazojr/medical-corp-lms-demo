@@ -1,0 +1,10 @@
+'use client'
+import { useEffect, useMemo, useState } from 'react'
+import { Clock3 } from 'lucide-react'
+type Event={course:string;slug:string;enteredAt:string}
+const seed:Event[]=[
+ {course:'Actualización Profesional en Atención Médica',slug:'actualizacion-atencion-medica',enteredAt:'2026-10-05T14:32:00-06:00'},
+ {course:'Bioseguridad Clínica y Prevención de Riesgos',slug:'bioseguridad-clinica',enteredAt:'2026-10-04T18:07:00-06:00'},
+ {course:'Actualización Profesional en Atención Médica',slug:'actualizacion-atencion-medica',enteredAt:'2026-10-03T09:18:00-06:00'},
+]
+export function AttendanceView(){const [events,setEvents]=useState<Event[]>(seed);useEffect(()=>{try{const saved=JSON.parse(localStorage.getItem('mc_attendance_events')||'[]') as Event[];const all=[...saved,...seed].filter((event,index,arr)=>arr.findIndex(x=>x.slug===event.slug&&x.enteredAt===event.enteredAt)===index);setEvents(all)}catch{}},[]);const courses=useMemo(()=>new Set(events.map(e=>e.slug)).size,[events]);return <><div className="kpis kpis-3"><div className="kpi"><div className="kpi-label">REGISTROS DE INGRESO</div><div className="kpi-value">{events.length}</div></div><div className="kpi"><div className="kpi-label">CURSOS REGISTRADOS</div><div className="kpi-value">{courses}</div></div><div className="kpi"><div className="kpi-label">MÉTODO</div><div className="kpi-value kpi-small">Ingreso al curso</div></div></div><div className="table-wrap" style={{marginTop:20}}><table className="table"><thead><tr><th>Curso</th><th>Fecha</th><th>Hora de ingreso</th><th>Estado</th></tr></thead><tbody>{events.map((event,i)=>{const d=new Date(event.enteredAt);return <tr key={`${event.enteredAt}-${i}`}><td><b>{event.course}</b></td><td>{new Intl.DateTimeFormat('es-HN',{dateStyle:'medium'}).format(d)}</td><td><span className="time-chip"><Clock3 size={14}/>{new Intl.DateTimeFormat('es-HN',{timeStyle:'short'}).format(d)}</span></td><td><span className="status success">Presente</span></td></tr>})}</tbody></table></div></>}

@@ -18,11 +18,20 @@
 - `/campus/tareas`
 - `/campus/calificaciones`
 - `/campus/asistencia`
-- `/campus/recursos`
 - `/campus/foros`
 - `/campus/mensajes`
 - `/campus/notificaciones`
 - `/campus/perfil`
+
+## Profesor
+
+- `/teacher`
+- `/teacher/cursos`
+- `/teacher/cursos/[slug]`
+- `/teacher/calendario`
+- `/teacher/mensajes`
+- `/teacher/analitica`
+- `/teacher/perfil`
 
 ## Admin/API
 

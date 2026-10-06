@@ -7,6 +7,6 @@ export async function POST(req: Request){
   const studentPass=process.env.DEMO_STUDENT_PASSWORD; const teacherPass=process.env.DEMO_TEACHER_PASSWORD
   if(!studentPass||!teacherPass) return NextResponse.redirect(new URL('/login?error=config',req.url),303)
   if(email===studentEmail&&password===studentPass){await setSession({id:'student-demo',email,name:'Ana Martínez',role:'STUDENT'});return NextResponse.redirect(new URL('/campus',req.url),303)}
-  if(email===teacherEmail&&password===teacherPass){await setSession({id:'teacher-demo',email,name:'Dr. Carlos Rivera',role:'TEACHER'});return NextResponse.redirect(new URL('/campus',req.url),303)}
+  if(email===teacherEmail&&password===teacherPass){await setSession({id:'teacher-demo',email,name:'Dr. Carlos Rivera',role:'TEACHER'});return NextResponse.redirect(new URL('/teacher',req.url),303)}
   return NextResponse.redirect(new URL('/login?error=invalid',req.url),303)
 }
